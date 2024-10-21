@@ -15,6 +15,39 @@ const tablero = Array.from({length: alto}, (_, y) =>
     Array.from({length: ancho}, (_, x) => (y >= alto - 2 && x < ancho - 2) ? 1 : 0)
 )
 
+//piezas
+const piezas = [
+    [ // o
+      [1, 1],
+      [1, 1]
+    ],
+    [ //l
+      [1, 1, 1, 1]
+    ],
+    [ // t
+      [0, 1, 0],
+      [1, 1, 1]
+    ],
+    [ // z
+      [1, 1, 0],
+      [0, 1, 1]
+    ],
+    [ // s
+      [0, 1, 1],
+      [1, 1, 0]
+    ],
+    [ //l
+      [1, 0],
+      [1, 0],
+      [1, 1]
+    ],
+    [ //j
+      [0, 1],
+      [0, 1],
+      [1, 1]
+    ]
+  ]
+
 // bucle principal
 function actualiza(){
     contexto.fillStyle = '#000'
@@ -31,3 +64,15 @@ function actualiza(){
 }
 
 actualiza()
+
+function colisiona () {
+    return piezas.shape.find((fila, y) => {
+      return fila.find((valor, x) => {
+        return (
+          value === 1 &&
+          tablero[y + piezas.position.y]?.[x + piezas.position.x] !== 0
+        )
+      })
+    })
+  }
+  
