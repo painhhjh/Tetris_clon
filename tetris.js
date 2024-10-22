@@ -13,9 +13,12 @@ contexto.scale(escala, escala); // Escala de píxeles
 
 // Tablero del juego
 const tablero = Array.from({ length: alto }, (_, y) =>
-    Array.from({ length: ancho }, (_, x) => (y >= alto - 2 && x < ancho - 2) ? 1 : 0)
+    Array.from({ length: ancho }, (_, x) => 
+        (y === alto - 1 || x === 0 || x === ancho - 1) ? 1 : 0
+    )
 );
 
+tablero.forEach(fila => fila.fill(0));
 // Piezas
 const piezas = [
     [[1, 1], [1, 1]], // O
@@ -100,7 +103,7 @@ function dibujar() {
         fila.forEach((valor, x) => {
             if (valor === 1) {
                 contexto.fillStyle = 'yellow';
-                contexto.fillRect(x, y, 1, 1); // Cambia fila.indexOf(valor) por y
+                contexto.fillRect(x, y, 1, 1); 
             }
         });
     });
@@ -142,7 +145,7 @@ function actualizar(tiempo = 0) {
 
 // Maneja los eventos de teclado para mover y rotar la pieza
 document.addEventListener('keydown', evento => {
-    if (!juegoIniciado) return; // Evita manejar eventos antes de iniciar el juego
+    if (!juegoIniciado) return; // para evitar manejar eventos antes de iniciar el juego
 
     if (evento.key === 'ArrowLeft') {
         pieza.posicion.x--;
