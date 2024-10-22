@@ -7,10 +7,11 @@
   </head>
   <body>
     <div id="app">
-      <section>Empieza a Jugar</section>
-      <canvas></canvas>  
+      <section id="seccion">Empieza a Jugar</section>
+      <canvas alt="Tetris"></canvas>  
     </div>
-    <strong>Puntaje: <span></span></strong>
-    <script type="module" src="/juego.js"></script>
+    <strong>Puntaje: <span id="puntaje"></span></strong>
+    <audio id="audio" src="./tetris.mp3"></audio>
+    <script type="module" src='./tetris.js'></script>
   </body>
 </html>
