@@ -1,7 +1,4 @@
-import './style.css';
-
-// Selecciona el elemento canvas
-const campo = document.querySelector('canvas'); // que el selector coincida con el elemento real
+const campo = document.querySelector('canvas'); // Selecciona el elemento canvas
 const contexto = campo.getContext('2d'); // Contexto de dibujo
 const escala = 20; // Píxeles por cuadrado
 const ancho = 10;
@@ -69,11 +66,13 @@ function reiniciarPieza() {
         forma: piezas[Math.floor(Math.random() * piezas.length)],
         posicion: { x: Math.floor(ancho / 2 - 2), y: 0 }
     };
+    
     // Si la nueva pieza colisiona al aparecer, el juego termina
     if (colisiona()) {
         alert('¡Juego terminado! Lo siento!');
         tablero.forEach(fila => fila.fill(0));
         puntaje = 0;
+        document.getElementById('puntaje').innerText = puntaje; // Resetear puntaje visualmente
     }
 }
 
@@ -85,6 +84,7 @@ function eliminarFilas() {
             filasAEliminar.push(y);
         }
     });
+    
     filasAEliminar.forEach(y => {
         tablero.splice(y, 1);
         tablero.unshift(Array(ancho).fill(0));
@@ -174,6 +174,7 @@ document.addEventListener('keydown', evento => {
         const rotada = pieza.forma[0].map((_, i) => pieza.forma.map(row => row[i]).reverse());
         const formaAnterior = pieza.forma;
         pieza.forma = rotada;
+        
         if (colisiona()) {
             pieza.forma = formaAnterior;
         }
