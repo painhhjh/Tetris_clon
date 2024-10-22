@@ -126,6 +126,7 @@ function actualizar(tiempo = 0) {
     // Mueve la pieza hacia abajo cada segundo
     if (contadorCaida > 1000) {
         pieza.posicion.y++;
+        contadorCaida = 0;
         
         // Verifica colisión después de mover hacia abajo
         if (colisiona(0, 1)) {
