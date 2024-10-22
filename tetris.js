@@ -40,6 +40,7 @@ let pieza = {
 let puntaje = 0;
 let contadorCaida = 0;
 let ultimoTiempo = 0;
+let juegoIniciado = false; // Flag para controlar el inicio del juego
 
 // Verifica si la pieza colisiona con el tablero o con otras piezas
 function colisiona() {
@@ -96,11 +97,11 @@ function dibujar() {
     contexto.fillStyle = '#000';
     contexto.fillRect(0, 0, campo.width, campo.height);
 
-    tablero.forEach((fila, y) => {
+    tablero.forEach((fila) => {
         fila.forEach((valor, x) => {
             if (valor === 1) {
                 contexto.fillStyle = 'yellow';
-                contexto.fillRect(x, y, 1, 1);
+                contexto.fillRect(x, fila.indexOf(valor), 1, 1);
             }
         });
     });
@@ -143,6 +144,8 @@ function actualizar(tiempo = 0) {
 
 // Maneja los eventos de teclado para mover y rotar la pieza
 document.addEventListener('keydown', evento => {
+    if (!juegoIniciado) return; // Evita manejar eventos antes de iniciar el juego
+
     if (evento.key === 'ArrowLeft') {
         pieza.posicion.x--;
         if (colisiona()) {
@@ -179,9 +182,11 @@ document.addEventListener('keydown', evento => {
 
 // Inicia el juego al hacer clic en la sección
 $section.addEventListener('click', () => {
-    actualizar();
-    $section.remove()
-    audio.volume = 0.01
-    audio.play()
+    if (!juegoIniciado) { // Inicia solo si no ha comenzado
+        actualizar();
+        $section.remove();
+        audio.volume = 0.01;
+        audio.play();
+        juegoIniciado = true; // Marca que el juego ha comenzado
+    }
 });
-
