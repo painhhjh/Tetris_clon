@@ -7,7 +7,6 @@ const alto = 24;
 const $section = document.querySelector('section');
 const audio = new window.Audio('./tetris.mp3');
 
-
 campo.width = ancho * escala; // Ancho en píxeles
 campo.height = alto * escala; // Alto en píxeles
 contexto.scale(escala, escala); // Escala de píxeles
@@ -40,10 +39,10 @@ let ultimoTiempo = 0;
 let juegoIniciado = false; // Flag para controlar el inicio del juego
 
 // Verifica si la pieza colisiona con el tablero o con otras piezas
-function colisiona() {
+function colisiona(offsetX = 0, offsetY = 0) {
     return pieza.forma.some((fila, y) =>
         fila.some((valor, x) =>
-            valor === 1 && (tablero[y + pieza.posicion.y]?.[x + pieza.posicion.x] !== 0)
+            valor === 1 && (tablero[y + pieza.posicion.y + offsetY]?.[x + pieza.posicion.x + offsetX] !== 0)
         )
     );
 }
@@ -97,11 +96,11 @@ function dibujar() {
     contexto.fillStyle = '#000';
     contexto.fillRect(0, 0, campo.width, campo.height);
 
-    tablero.forEach((fila) => {
+    tablero.forEach((fila, y) => {
         fila.forEach((valor, x) => {
             if (valor === 1) {
                 contexto.fillStyle = 'yellow';
-                contexto.fillRect(x, fila.indexOf(valor), 1, 1);
+                contexto.fillRect(x, y, 1, 1); // Cambia fila.indexOf(valor) por y
             }
         });
     });
@@ -122,19 +121,17 @@ function dibujar() {
 function actualizar(tiempo = 0) {
     const deltaTiempo = tiempo - ultimoTiempo;
     ultimoTiempo = tiempo;
-
     contadorCaida += deltaTiempo;
 
     // Mueve la pieza hacia abajo cada segundo
     if (contadorCaida > 1000) {
         pieza.posicion.y++;
-        contadorCaida = 0;
-
-        // Si la pieza colisiona, la solidifica y elimina filas completas
-        if (colisiona()) {
-            pieza.posicion.y--;
-            solidificarPieza();
-            eliminarFilas();
+        
+        // Verifica colisión después de mover hacia abajo
+        if (colisiona(0, 1)) {
+            pieza.posicion.y--; // Mueve hacia arriba si hay colisión
+            solidificarPieza(); // Solidifica la pieza
+            eliminarFilas(); // Elimina filas completas
         }
     }
 
