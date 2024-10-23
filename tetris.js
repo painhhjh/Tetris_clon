@@ -19,6 +19,7 @@ const tablero = Array.from({ length: alto }, (_, y) =>
 );
 
 tablero.forEach(fila => fila.fill(0));
+
 // Piezas
 const piezas = [
     [[1, 1], [1, 1]], // O
@@ -29,6 +30,16 @@ const piezas = [
     [[1, 0], [1, 0], [1, 1]], // L
     [[0, 1], [0, 1], [1, 1]] // J
 ];
+
+const colores = {
+  0: 'yellow', 
+  1: 'cyan',
+  2: 'purple',
+  3: 'red',
+  4: 'green',
+  5: 'orange',
+  6: 'blue'    
+}
 
 // Inicia una nueva pieza con una forma aleatoria y posición inicial
 let pieza = {
@@ -64,8 +75,10 @@ function solidificarPieza() {
 
 // Reinicia la pieza con una nueva forma aleatoria y posición inicial
 function reiniciarPieza() {
+    const randomPieza = Math.floor(Math.random() * piezas.length)
     pieza = {
-        forma: piezas[Math.floor(Math.random() * piezas.length)],
+        forma: piezas[randomPieza],
+        color: colores[randomPieza],
         posicion: { x: Math.floor(ancho / 2 - 2), y: 0 }
     };
     
@@ -96,7 +109,10 @@ function eliminarFilas() {
 
 // Dibuja el tablero y la pieza actual en el canvas
 function dibujar() {
-    contexto.fillStyle = '#000';
+    var degradado = contexto.createLinearGradient(0, 0, 0, 150);
+    degradado.addColorStop(0, '#100D14'); 
+    degradado.addColorStop(1, '#000000');
+    contexto.fillStyle = degradado;
     contexto.fillRect(0, 0, campo.width, campo.height);
 
     tablero.forEach((fila, y) => {
@@ -111,7 +127,11 @@ function dibujar() {
     pieza.forma.forEach((fila, y) => {
         fila.forEach((valor, x) => {
             if (valor) {
-                contexto.fillStyle = 'red';
+                if (!pieza.color) {
+                  contexto.fillStyle = 'red';
+                } else {
+                  contexto.fillStyle = pieza.color;
+                }
                 contexto.fillRect(x + pieza.posicion.x, y + pieza.posicion.y, 1, 1);
             }
         });
@@ -128,15 +148,19 @@ function actualizar(tiempo = 0) {
 
     // Mueve la pieza hacia abajo cada segundo
     if (contadorCaida > 1000) {
-        pieza.posicion.y++;
-        contadorCaida = 0;
-        
-        // Verifica colisión después de mover hacia abajo
+        let puedeMoverAbajo = true;
+
+        // Verifica si la pieza puede moverse hacia abajo
         if (colisiona(0, 1)) {
-            pieza.posicion.y--; // Mueve hacia arriba si hay colisión
+            puedeMoverAbajo = false; 
+        }
+        if (puedeMoverAbajo) {
+            pieza.posicion.y++; 
+        } else {
             solidificarPieza(); // Solidifica la pieza
             eliminarFilas(); // Elimina filas completas
         }
+        contadorCaida = 0;
     }
 
     dibujar();
