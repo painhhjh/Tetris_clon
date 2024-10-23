@@ -3,10 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
   font-size: 2rem;
-
-  color-scheme: dark light;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(to bottom, #242424);
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,21 +12,25 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  height: 100vh;
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%; 
+  background: linear-gradient(to bottom, #242424); 
+}
+
+body {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  place-content: center; 
+  place-content: center;
 }
-  
+
 section {
   position: absolute;
   background: radial-gradient(circle, #1368D8, #7020CB);
-  width: 100vw;
   top: 0;
   inset: 0;
   display: grid;
