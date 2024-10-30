@@ -8,16 +8,30 @@
     <script type="module" src='./tetris.js'></script>
   </head>
   <body>
-    <div id="app">
-      <section id="section">
-        <div class="title">
-          <h1>Comienza a Jugar! <img src="images\consola.png" alt="consola"></h1>
-        </div> 
-      </section>
-      
-      <canvas alt="Tetris"></canvas>  
+    <div class="main-container">
+      <div class="header">
+        <a href="#" onclick="location.reload()" aria-label="Inicio">
+         <img src="images/tetris.png">
+        </a>
+        <h1>Tetris</h1>
+     </div>
+     <section id="section">
+      <div class="title">
+        <h1>Comienza a Jugar! <img src="images\consola.png" alt="consola"></h1>
+      </div>
+    </section>
+     <div class="container">
+      <div id="app">
+         <canvas alt="Tetris"></canvas>  
+      </div>
+      <strong>Puntaje: <span id="puntaje"></span></strong>
+      <audio id="audio" src="./tetris.mp3"></audio>
     </div>
-    <strong>Puntaje: <span id="puntaje"></span></strong>
-    <audio id="audio" src="./tetris.mp3"></audio>
+ 
+    <div class="footer">
+       <p class="text-center"> Franklin Astudillo Y Alexander Briceño | © 2024</p>
+       <p class="text-center">Todos los derechos reservados.</p>
+    </div>
+  </div>
   </body>
 </html>
