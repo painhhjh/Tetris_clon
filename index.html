@@ -15,16 +15,28 @@
         </a>
         <h1>Tetris</h1>
      </div>
+
      <section id="section">
       <div class="title">
-        <h1>Comienza a Jugar! <img src="images\consola.png" alt="consola"></h1>
+        <h1>Bienvenido al Mejor Tetris <img src="images\consola.png" alt="consola"></h1>
+      </div>
+      <div class="wrapper">
+        <form action="" method="POST">
+           <h1>Ingresa un Username</h1>
+           <div class="input-box">
+                <input type="text" placeholder="Usuario" id="user" name="user" required>
+           </div>
+
+           <button type="button" class="btn" name="login" onclick="startGame()">Ingresar</button>
+        </form>
       </div>
     </section>
+
      <div class="container">
       <div id="app">
          <canvas alt="Tetris"></canvas>  
       </div>
-      <strong>Puntaje: <span id="puntaje"></span></strong>
+      <strong>Puntaje de <span id="username"></span>: <span id="puntaje"></span></strong>
       <audio id="audio" src="./tetris.mp3"></audio>
     </div>
  

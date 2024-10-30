@@ -206,13 +206,26 @@ document.addEventListener('keydown', evento => {
     }
 });
 
-// Inicia el juego al hacer clic en la sección
-$section.addEventListener('click', () => {
-    if (!juegoIniciado) { // Inicia solo si no ha comenzado
+window.startGame = function () {
+    const user = document.getElementById('user').value;
+    const username = document.getElementById('username');
+
+    if (user && username) {
+        username.textContent = user;
+    }
+    if (!juegoIniciado && user) {
         actualizar();
         $section.remove();
         audio.volume = 0.01;
         audio.play();
-        juegoIniciado = true; // Marca que el juego ha comenzado
+        juegoIniciado = true;
+        console.log("Usuario:", user);
+    }
+}
+
+document.getElementById('user').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        startGame(); 
     }
 });
