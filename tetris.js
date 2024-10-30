@@ -147,7 +147,7 @@ function actualizar(tiempo = 0) {
     contadorCaida += deltaTiempo;
 
     // Mueve la pieza hacia abajo cada segundo
-    if (contadorCaida > 1000) {
+    if (contadorCaida > 500) {
         let puedeMoverAbajo = true;
 
         // Verifica si la pieza puede moverse hacia abajo
