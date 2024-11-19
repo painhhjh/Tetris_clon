@@ -4,7 +4,7 @@ from rest_framework import routers
 from leaderboard import views
 
 router = routers.DefaultRouter()
-router.register(r'usuarios', views.UserView, 'usuarios')
+router.register(r'usuarios', views.UserViewSet, 'usuarios')
 
 urlpatterns = [
     path("api/", include(router.urls)),

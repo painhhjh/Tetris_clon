@@ -1,3 +1,5 @@
+import { enviarPuntaje } from "./leaderboard.js";
+
 const campo = document.querySelector('canvas'); // Selecciona el elemento canvas
 const contexto = campo.getContext('2d'); // Contexto de dibujo
 const escala = 20; // Píxeles por cuadrado
@@ -51,6 +53,7 @@ let puntaje = 0;
 let contadorCaida = 0;
 let ultimoTiempo = 0;
 let juegoIniciado = false; // Flag para controlar el inicio del juego
+let usuario 
 
 // Verifica si la pieza colisiona con el tablero o con otras piezas
 function colisiona(offsetX = 0, offsetY = 0) {
@@ -85,6 +88,8 @@ function reiniciarPieza() {
     // Si la nueva pieza colisiona al aparecer, el juego termina
     if (colisiona()) {
         alert('¡Juego terminado! Lo siento!');
+        // se envia el usuario y puntaje al backend
+        enviarPuntaje(usuario,puntaje)
         tablero.forEach(fila => fila.fill(0));
         puntaje = 0;
         document.getElementById('puntaje').innerText = puntaje; // Resetear puntaje visualmente
@@ -205,11 +210,11 @@ document.addEventListener('keydown', evento => {
         }
     }
 });
-
 window.startGame = function () {
     const user = document.getElementById('user').value;
     const username = document.getElementById('username');
-
+    usuario = user;
+    
     if (user && username) {
         username.textContent = user;
     }
@@ -219,7 +224,6 @@ window.startGame = function () {
         audio.volume = 0.01;
         audio.play();
         juegoIniciado = true;
-        console.log("Usuario:", user);
     }
 }
 

@@ -55,6 +55,7 @@ html, body {
   align-items: center;
   justify-content: center;
   height: calc(100vh - 7rem);
+  gap: 6rem;
 }
 
 .app {
@@ -181,4 +182,53 @@ section {
 
 .register-link p a:hover {
   text-decoration: underline;
+}
+
+/* Tabla*/
+
+.table-container {
+  padding: 20px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  background: #2C2E33;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table thead th {
+  text-align: center; /* Centra el texto en los encabezados */
+}
+
+.styled-table thead th {
+  text-align: center;
+}
+
+.styled-table th, .styled-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+}
+
+.styled-table td {
+  font-size: 16px;
+  text-align: center;
+}
+
+.styled-table td img {
+  width: 50px;
+  height: 50px;
+}
+
+.styled-table th {
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
 }
