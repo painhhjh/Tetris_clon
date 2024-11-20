@@ -83,9 +83,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tetris_db',
-        'USER': 'root',
-        'PASSWORD': '2308',
-        'HOST': 'localhost', 
+        'USER': 'tetris',
+        'PASSWORD': 'Franklin%',
+        'HOST': 'tetris-backend.mysql.database.azure.com', 
         'PORT': '3306',      
     }
 }
