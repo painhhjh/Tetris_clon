@@ -1,4 +1,5 @@
-const apiUrl = "http://127.0.0.1:8000/leaderboard/api/usuarios/"
+const apiUrl = "https://tetris-backend.azurewebsites.net/leaderboard/api/usuarios/"
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const leaderboardBody = document.getElementById("leaderboard-body")
